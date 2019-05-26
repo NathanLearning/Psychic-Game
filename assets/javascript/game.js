@@ -6,7 +6,14 @@ var stats = {
     guessesLeft: 10,
     guessedLetters: []
 }
-var compSelect = compChoices[Math.floor(Math.random() * compChoices.length)]
+var compSelect
+
+function compGuess() {
+    compSelect = compChoices[Math.floor(Math.random() * compChoices.length)]
+    return compSelect
+}
+
+compGuess()
 
 document.onkeyup = function(event) {
     var userGuess = event.key
@@ -15,6 +22,7 @@ document.onkeyup = function(event) {
         stats.wins++
         stats.guessesLeft = 10
         stats.guessedLetters = []
+        compGuess()
     }
 
     if (userGuess !== compSelect) { 
@@ -25,6 +33,7 @@ document.onkeyup = function(event) {
         stats.losses++
         stats.guessedLetters = []
         stats.guessesLeft = 10
+        compGuess()
     }
 
     if  (stats.guessedLetters.indexOf(userGuess) >= 0) {
